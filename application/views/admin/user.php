@@ -155,7 +155,7 @@
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
-                [0, 'asc']
+                [5, 'asc']
             ],
             "iDisplayLength" : 10
         });

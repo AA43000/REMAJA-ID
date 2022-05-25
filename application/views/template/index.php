@@ -28,6 +28,7 @@
   <script src="<?= base_url('assets/') ?>js/sweetalert.min.js"></script>
   <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/select2/select2.min.css">
   <link href="<?= base_url() ?>assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/vendor/remixicon/remixicon.css" rel="stylesheet">
 
 </head>
 

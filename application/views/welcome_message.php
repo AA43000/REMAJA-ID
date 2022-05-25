@@ -296,12 +296,15 @@
         <div class="row justify-content-center">
           <div class="col-xl-10">
             <div class="row">
+            <?php $service = $this->db->query("SELECT * FROM service WHERE status_delete = 0")->result();
+            foreach($service as $svc) : ?>
               <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-pie-chart-line"></i></div>
-                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                <div class="icon"><i class="<?= $svc->icon ?>"></i></div>
+                <h4 class="title"><a href=""><?= $svc->nama ?></a></h4>
+                <p class="description"><?= $svc->keterangan ?></p>
               </div>
-              <div class="col-lg-4 col-md-6 icon-box">
+      <?php endforeach; ?>
+              <!-- <div class="col-lg-4 col-md-6 icon-box">
                 <div class="icon"><i class="ri-stack-line"></i></div>
                 <h4 class="title"><a href="">Dolor Sitema</a></h4>
                 <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
@@ -325,7 +328,7 @@
                 <div class="icon"><i class="ri-body-scan-line"></i></div>
                 <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
                 <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

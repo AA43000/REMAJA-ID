@@ -53,10 +53,10 @@
             <a class="collapse-item" href="<?= base_url('aplikasi/') ?>">Aplikasi</a>
             <a class="collapse-item" href="<?= base_url('slide/') ?>">Slide</a>
             <a class="collapse-item" href="<?= base_url('about/') ?>">About</a>
-            <a class="collapse-item" href="utilities-animation.html">service</a>
-            <a class="collapse-item" href="utilities-other.html">Portfolio</a>
-            <a class="collapse-item" href="utilities-other.html">Team</a>
-            <a class="collapse-item" href="utilities-other.html">Contact Us</a>
+            <a class="collapse-item" href="<?= base_url('service/') ?>">service</a>
+            <a class="collapse-item" href="<?= base_url('portfolio/') ?>">Portfolio</a>
+            <a class="collapse-item" href="<?= base_url('team/') ?>">Team</a>
+            <a class="collapse-item" href="<?= base_url('contact/') ?>">Contact Us</a>
           </div>
         </div>
       </li>
