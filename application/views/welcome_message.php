@@ -647,6 +647,7 @@
               </div> <!-- End Member Item -->
             <?php endforeach; ?>
 
+
             </div>
           </div>
         </div>
