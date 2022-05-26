@@ -78,13 +78,13 @@ class Team extends CI_Controller {
 			if ($val->id_team>0) {
 				$edit = '<button class="btn btn-circle btn-sm btn-success" type="button" onclick="edit_data('.$val->id_team.')"><i class="fas fa-edit"></i></button>';
 				$delete = '<button class="btn btn-circle btn-sm btn-danger" type="button" onclick="delete_data('.$val->id_team.')"><i class="fas fa-trash"></i></button>';
-				$img = '<img src="'.base_url('assets/image/').$val->foto.'" witdh="100%">';
+				$image = '<a class="venobox" data-gall="slideGallery" title="slide '.$no.'" href="'.base_url('assets/image/team/').$val->image.'"><img src="'.base_url('assets/image/team/').$val->image.'" alt="image alt" width="100%"></a>';
 				
 				$response['data'][] = array(
                     $no,
                     $val->nama,
                     $val->jabatan,
-                    $img,
+                    $image,
                     $edit." ".$delete
 				);
 				$no++;	
@@ -108,9 +108,14 @@ class Team extends CI_Controller {
         if($this->input->post('id') > 0) {
             $data = $this->general_input_post();
             $where = [
-                'id_service' => $this->input->post('id')
-            ];
-            $update = $this->Modelku->update('service', $data, $where);
+                'id_team' => $this->input->post('id')
+			];
+			if(!empty($_FILES['image']['name'])){
+				$upload = $this->do_upload();
+				$data['image'] = $upload;
+				$this->hapus_image($this->input->post('id'));
+			}
+            $update = $this->Modelku->update('team', $data, $where);
             if($update<>false) {
                 $response['status'] = '200';
                 $response['message'] = 'Data berhasil di update';
@@ -119,8 +124,10 @@ class Team extends CI_Controller {
                 $response['message'] = 'gagal update data';
             }
         } else {
-            $data = $this->general_input_post();
-            $insert = $this->db->insert('service', $data);
+			$data = $this->general_input_post();
+			$upload = $this->do_upload();
+			$data['image'] = $upload;
+            $insert = $this->db->insert('team', $data);
             if($insert<>false) {
                 $response['status'] = '200';
                 $response['message'] = 'Berhasil menambahkan data';
@@ -137,20 +144,19 @@ class Team extends CI_Controller {
     function general_input_post() {
         $data = [
             'nama' => $this->input->post('nama'),
-            'keterangan' => $this->input->post('keterangan'),
-            'icon' => $this->input->post('icon'),
+            'jabatan' => $this->input->post('jabatan'),
         ];
 
         return $data;
     }
 
 	public function edit_data($id) {
-		$query = $this->db->query("SELECT * FROM service WHERE id_service = $id AND status_delete = 0")->row();
+		$query = $this->db->query("SELECT * FROM team WHERE id_team = $id AND status_delete = 0")->row();
         $response['value'] = [
-            'id' => $query->id_service,
+            'id' => $query->id_team,
             'nama' => $query->nama,
-			'keterangan' => $query->keterangan,
-			'icon' => $query->icon,
+			'jabatan' => $query->jabatan,
+			'image' => '<img src="'.base_url('assets/image/team/').$query->image.'" alt="image alt" width="100%">'
 			
         ];
 
@@ -160,9 +166,10 @@ class Team extends CI_Controller {
 	public function delete_data($id) {
 		$data['status_delete'] = 1;
 		$where = [
-			'id_service' => $id
+			'id_team' => $id
 		];
-		$delete = $this->Modelku->update('service', $data, $where);
+		$delete = $this->Modelku->update('team', $data, $where);
+		$this->hapus_image($id);
 		if($delete<>false) {
 			$response['status'] = '200';
 			$response['title'] = 'Data telah berhasil dihapus';
@@ -173,6 +180,33 @@ class Team extends CI_Controller {
 		}
 
 		echo json_encode($response);
-    }
+	}
+	function hapus_image($id) {
+		$query = $this->db->query("SELECT * FROM team WHERE id_team = $id")->row();
+		if(file_exists('assets/image/team/'.$query->image) && $query->image){
+			unlink('assets/image/team/'.$query->image);
+		}
+	}
+	function do_upload() {
+        $config['upload_path'] = 'assets/image/team/'; // folder menyimpan gambar
+        $config['allowed_types'] = 'gif|jpg|png';
+		// $config['max_size'] = '1000'; //dalam kilobyte(kb)
+		// $config['max_width']            = 1000; // batas lebar gambar
+		// $config['max_height']           = 1000; // batas tinggi gambar
+		$config['width'] = 500;
+        $config['file_name'] = round(microtime(true) * 1000); //nama file
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload('image')) { // jika upload gagal
+            $data['inputerror'][] =  'image';
+            $data['error_string'][] = "Upload error: ".$this->upload->display_errors('', ''); //menampilkan error
+            $data['status'] = FALSE;
+            echo json_encode($data);
+            exit();
+		}
+
+		return $this->upload->data('file_name'); // mengembalikan nama file
+	}
 
 }

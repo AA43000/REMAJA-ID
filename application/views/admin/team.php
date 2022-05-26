@@ -69,14 +69,20 @@
           </div>
 
           <div class="form-group">
-            <label for="keterangan">Jabatan</label>
+            <label for="jabatan">Jabatan</label>
             <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan">
           </div>
 
           <div class="form-group">
-            <label for="icon">Icon</label>
-            <input type="text" name="icon" id="icon" class="form-control"><br>
-            <small>*anda bisa mengunjungi <a href="https://themesdesign.in/nazox/layouts/vertical/icons-remix.html">https://themesdesign.in/nazox/layouts/vertical/icons-remix.html</a> untuk mendapatkan lebih banyak icon</small>
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
+          </div>
+
+          <div id="image-view" class="d-none">
+            <span>ubah image</span>
+            <div id="src">
+            
+            </div>
           </div>
 
         </form>
@@ -92,6 +98,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
         load_data();
+        $("#image").filestyle({
+          btnClass : 'btn-outline-primary',
+          text: 'Pilih Image'
+        });
+        $('#formModal').on('hidden.bs.modal', function (e) {
+            reset_form();
+        });
     });
     
     function load_data() {
@@ -106,7 +119,7 @@
                 {"name" : "id_team"},
                 {"name" : "nama"},
                 {"name" : "jabatan"},
-                {"name" : "foto"},
+                {"name" : "image"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
@@ -144,10 +157,11 @@
     }
 
     function reset_form() {
-    $("#id").val(0);
+      $("#id").val(0);
       $("#nama").val("");
-      $("#keterangan").val("");
-      $("#icon").val("");
+      $("#jabatan").val("");
+      $("#image").filestyle('clear');
+      $("#image-view").addClass("d-none");
     }
 
     function edit_data(id) {
@@ -159,8 +173,9 @@
             $("#formModal").modal('show');
             $("#nama").val(data.value.nama);
             $("#id").val(data.value.id);
-            $("#keterangan").val(data.value.keterangan);
-            $("#icon").val(data.value.icon);
+            $("#jabatan").val(data.value.jabatan);
+            $("#image-view").removeClass("d-none");
+            $("#src").html(data.value.image);
         });
     }
 

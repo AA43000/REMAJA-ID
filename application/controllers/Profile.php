@@ -61,11 +61,13 @@ class Profile extends CI_Controller {
 
 	public function editPassword() {
 		$id_user = $this->session->userdata('id_user');
-		$password = md5($this->input->post('passwordLama'));
+		$password = $this->input->post('passwordLama');
 		$query = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->row();
-		if($password == $query->password) {
+		// echo password_hash($this->input->post('passwordLama'), PASSWORD_BCRYPT);
+		if(password_verify($password, $query->password)) {
+		// if($password == $query->password) {
 			$data = [
-				'password' => $password
+				'password' => password_hash($this->input->post('passwordBaru'), PASSWORD_BCRYPT)
 			];
 			$this->db->where(['id_user' => $id_user]);
 			$this->db->update('user', $data);

@@ -303,7 +303,7 @@
                 <h4 class="title"><a href=""><?= $svc->nama ?></a></h4>
                 <p class="description"><?= $svc->keterangan ?></p>
               </div>
-      <?php endforeach; ?>
+            <?php endforeach; ?>
               <!-- <div class="col-lg-4 col-md-6 icon-box">
                 <div class="icon"><i class="ri-stack-line"></i></div>
                 <h4 class="title"><a href="">Dolor Sitema</a></h4>
@@ -625,77 +625,27 @@
           <div class="col-xl-10">
             <div class="row">
 
+              <?php $team = $this->db->query("SELECT * FROM team WHERE status_delete = 0")->result();
+              foreach($team as $tm): ?>
+
               <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="member">
-                  <img src="<?= base_url() ?>assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                  <img src="<?= base_url() ?>assets/image/team/<?= $tm->image ?>" class="img-fluid" alt="">
                   <div class="member-info">
                     <div class="member-info-content">
-                      <h4>Walter White</h4>
-                      <span>Chief Executive Officer</span>
+                      <h4><?= $tm->nama ?></h4>
+                      <span><?= $tm->jabatan ?></span>
                     </div>
-                    <div class="social">
+                    <!-- <div class="social">
                       <a href=""><i class="icofont-twitter"></i></a>
                       <a href=""><i class="icofont-facebook"></i></a>
                       <a href=""><i class="icofont-instagram"></i></a>
                       <a href=""><i class="icofont-linkedin"></i></a>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div> <!-- End Member Item -->
-
-              <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.1s">
-                <div class="member">
-                  <img src="<?= base_url() ?>assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                  <div class="member-info">
-                    <div class="member-info-content">
-                      <h4>Sarah Jhonson</h4>
-                      <span>Product Manager</span>
-                    </div>
-                    <div class="social">
-                      <a href=""><i class="icofont-twitter"></i></a>
-                      <a href=""><i class="icofont-facebook"></i></a>
-                      <a href=""><i class="icofont-instagram"></i></a>
-                      <a href=""><i class="icofont-linkedin"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- End Member Item -->
-
-              <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.2s">
-                <div class="member">
-                  <img src="<?= base_url() ?>assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                  <div class="member-info">
-                    <div class="member-info-content">
-                      <h4>William Anderson</h4>
-                      <span>CTO</span>
-                    </div>
-                    <div class="social">
-                      <a href=""><i class="icofont-twitter"></i></a>
-                      <a href=""><i class="icofont-facebook"></i></a>
-                      <a href=""><i class="icofont-instagram"></i></a>
-                      <a href=""><i class="icofont-linkedin"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- End Member Item -->
-
-              <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.3s">
-                <div class="member">
-                  <img src="<?= base_url() ?>assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                  <div class="member-info">
-                    <div class="member-info-content">
-                      <h4>Amanda Jepson</h4>
-                      <span>Accountant</span>
-                    </div>
-                    <div class="social">
-                      <a href=""><i class="icofont-twitter"></i></a>
-                      <a href=""><i class="icofont-facebook"></i></a>
-                      <a href=""><i class="icofont-instagram"></i></a>
-                      <a href=""><i class="icofont-linkedin"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div> <!-- End Member Item -->
+            <?php endforeach; ?>
 
             </div>
           </div>

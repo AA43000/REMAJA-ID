@@ -48,7 +48,7 @@ class Login extends CI_Controller {
 				$dataAkun = array(
 					'nama' => $this->input->post('nama'),
 					'username' => $this->input->post('username'),
-					'password' => md5($this->input->post('password')),
+					'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 					'nomor_wa' => $this->input->post('nomor_wa'),
 					'user_type' => $this->input->post('user_type'),
 					'status_approve' => 0
@@ -67,11 +67,12 @@ class Login extends CI_Controller {
 
 	public function masuk() {
 		$username = $this->input->post("username", TRUE);
-		$password = md5($this->input->post("password", TRUE));
+		$password = $this->input->post("password", TRUE);
 		$users = $this->db->query("SELECT * FROM user WHERE username = '$username' AND status_delete = 0")->row();
 		
 		if ($users) {
-			if ($password == $users->password) {
+			if(password_verify($password, $users->password)) {
+			// if ($password == $users->password) {
 				if($users->status_approve == 1) {
 					$userdata = [
 						"id_user" => $users->id_user,
