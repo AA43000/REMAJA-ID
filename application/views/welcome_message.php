@@ -673,34 +673,35 @@
               <div class="col-lg-6">
 
                 <div class="row justify-content-center">
+                <?php $contact = $this->db->query("SELECT * FROM contact")->row(); ?>
 
                   <div class="col-md-6 info d-flex flex-column align-items-stretch">
                     <i class="bx bx-map"></i>
                     <h4>Address</h4>
-                    <p>A108 Adam Street,<br>New York, NY 535022</p>
+                    <p><?= $contact->alamat ?></p>
                   </div>
                   <div class="col-md-6 info d-flex flex-column align-items-stretch">
                     <i class="bx bx-phone"></i>
                     <h4>Call Us</h4>
-                    <p>+1 5589 55488 55<br>+1 5589 22548 64</p>
+                    <p><?= $contact->no_telp ?></p>
                   </div>
                   <div class="col-md-6 info d-flex flex-column align-items-stretch">
                     <i class="bx bx-envelope"></i>
                     <h4>Email Us</h4>
-                    <p>contact@example.com<br>info@example.com</p>
+                    <p><?= $contact->email ?></p>
                   </div>
-                  <div class="col-md-6 info d-flex flex-column align-items-stretch">
+                  <!-- <div class="col-md-6 info d-flex flex-column align-items-stretch">
                     <i class="bx bx-time-five"></i>
                     <h4>Working Hours</h4>
                     <p>Mon - Fri: 9AM to 5PM<br>Sunday: 9AM to 1PM</p>
-                  </div>
+                  </div> -->
 
                 </div>
 
               </div>
 
               <div class="col-lg-6">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <form action="<?= base_url() ?>Welcome/message" method="post" role="form" class="php-email-form">
                   <div class="form-row">
                     <div class="col-md-6 form-group">
                       <label for="name">Your Name</label>
@@ -744,7 +745,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <div class="footer-newsletter">
+    <!-- <div class="footer-newsletter">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
@@ -758,9 +759,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="footer-top">
+    <!-- <div class="footer-top">
       <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-xl-10">
@@ -816,11 +817,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Hidayah</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Ahmad Zaeni Mubarok</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

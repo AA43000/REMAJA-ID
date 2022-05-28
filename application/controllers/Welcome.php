@@ -34,4 +34,16 @@ class Welcome extends CI_Controller {
 			redirect(base_url('login'));
 		}
 	}
+
+	public function message() {
+		$query = $this->db->query("SELECT email FROM contact")->row();
+		$to = $query->email; // this is your Email address
+		$from = $_POST['email']; // this is the sender's Email address
+		$subject = $_POST['subject'];;
+		$message = $_POST['message'];;
+
+		$headers = "From:" . $from;
+		mail($to,$subject,$message,$headers);
+		echo "success";	
+	}
 }
