@@ -77,6 +77,7 @@ class Login extends CI_Controller {
 					$userdata = [
 						"id_user" => $users->id_user,
 						"nama" => $users->nama,
+						"username" => $users->username,
 						"user_type" => $users->user_type
 					];
 					// set session data
