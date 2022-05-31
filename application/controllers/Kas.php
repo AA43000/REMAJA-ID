@@ -217,7 +217,7 @@ class Kas extends CI_Controller {
                     $response['message'] = 'gagal tambah data';
                 }
             }
-            $this->insert_detail($id);
+            $this->insert_detail($id, $this->input->post("tanggal"));
         } else {
             $response['status'] = '202';
             $response['message'] = 'gagal tambah data, kas ditanggal tersebut sudah tersedia';
@@ -234,7 +234,7 @@ class Kas extends CI_Controller {
         }
         return $cek;
     }
-    public function insert_detail($id) {
+    public function insert_detail($id, $tanggal) {
         $session = $this->session->userdata("session_kas");
         foreach($session as $key => $val) {
             $cek = $this->db->query("SELECT id FROM kas_detail WHERE id_kas = $id AND id_user = $key")->row();
@@ -254,7 +254,53 @@ class Kas extends CI_Controller {
                 ]);
             }
         }
+
+        $cek = $this->db->query("SELECT id FROM pemasukan WHERE idm_pemasukan = 1 AND tanggal = '$tanggal'")->row();
+        if($cek) {
+            $this->db->update("pemasukan", [
+                'idm_pemasukan' => 1,
+                'tanggal' => $tanggal,
+                'jumlah' => $this->_convert($this->input->post('jumlah')),
+                'operator' => $this->session->userdata("username"),
+            ], [
+                'id' => $cek->id
+            ]);
+        } else {
+            $this->db->insert("pemasukan", [
+                'kode' => $this->_get_code2(),
+                'idm_pemasukan' => 1,
+                'tanggal' => $tanggal,
+                'jumlah' => $this->_convert($this->input->post('jumlah')),
+                'operator' => $this->session->userdata("username"),
+            ]);
+        }
+
         return true;
+    }
+
+    public function _get_code2()
+    {
+        $bln = date('m');
+        $thn = date('y');
+        $query =  $this->db->query("SELECT CAST(MID(kode, 10, 4) AS UNSIGNED) AS ids FROM pemasukan WHERE kode LIKE CONCAT('PMS/', '$thn', '$bln', '/', '%') ORDER BY kode DESC LIMIT 1")->row();
+        if ($query) {
+            if ($query->ids<9) {
+                $nomor = $query->ids+1;
+                $seq = '000'.$nomor;
+            } elseif ($query->ids<99) {
+                $nomor = $query->ids+1;
+                $seq = '00'.$nomor;
+            } elseif ($query->ids<999) {
+                $nomor = $query->ids+1;
+                $seq = '0'.$nomor;
+            } else {
+                $nomor = $query->ids+1;
+                $seq = $nomor;
+            }
+        } else {
+            $seq = '0001';
+        }
+        return "PMS/".$thn.$bln."/".$seq;
     }
 
     function general_input_post() {
