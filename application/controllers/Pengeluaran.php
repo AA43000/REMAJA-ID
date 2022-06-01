@@ -38,71 +38,90 @@ class Pengeluaran extends CI_Controller {
 		$this->load->view('template/index', $data);
 	}
     
-    public function load_data() {
-	$select = "a.*, b.nama";
-	//LIMIT
-	$limit = array(
-		'start'  => $this->input->get('start'),
-		'finish' => $this->input->get('length')
-	);
-	//WHERE LIKE
-	$where_like['data'][] = array(
-		'column' => 'a.kode, b.nama',
-		'param'	 => $this->input->get('search[value]')
-	);
-	//ORDER
-	$index_order = $this->input->get('order[0][column]');
-	$order['data'][] = array(
-		'column' => $this->input->get('columns['.$index_order.'][name]'),
-		'type'	 => $this->input->get('order[0][dir]')
-	);
+    public function load_data($jenis, $tanggal_awal, $tanggal_akhir) {
+        $request = (object) [
+            "like" => $this->input->get("search[value]", true),
+            "order" => (object) [
+                "column" => $this->input->get('columns['.$this->input->get('order[0][column]').'][name]'),
+                "type" => $this->input->get('order[0][dir]')
+            ],
+            "limit" => (object) [
+                "start" => $this->input->get("start", true),
+                "length" => $this->input->get("length", true)
+            ]
+        ];
+        $this->db->select("a.*, b.nama");
+        $this->db->join("m_pengeluaran b", "b.id=a.idm_pengeluaran", "left");
+        $this->db->order_by($request->order->column, $request->order->type);
+        $this->db->where("a.status_delete", 0);
+        if($jenis != 0) {
+            $this->db->where("a.idm_pengeluaran", $jenis);
+        }
+        if($tanggal_awal != 0) {
+            $this->db->where("a.tanggal >=", "$tanggal_awal");
+        }
+        if($tanggal_akhir != 0) {
+            $this->db->where("a.tanggal <=", "$tanggal_akhir");
+        }
+        $this->db->where("a.status_delete", 0);
+        $this->db->like("CONCAT_WS(' ', a.kode, b.nama)", $request->like, "both");
+        if($request->limit->length>="0"){
+            $this->db->limit($request->limit->length, $request->limit->start);
+        }
+        $query = $this->db->get("pengeluaran a");
+        $response['data'] = array();
+        if ($query<>false) {
+            $no = $request->limit->start+1;
+            foreach ($query->result() as $val) {
+                if ($val->id>0) {
+                    $edit = '<button class="btn btn-circle btn-sm btn-success" type="button" onclick="edit_data('.$val->id.')"><i class="fas fa-edit"></i></button>';
+                    $delete = '<button class="btn btn-circle btn-sm btn-danger" type="button" onclick="delete_data('.$val->id.')"><i class="fas fa-trash"></i></button>';
+                    
+                    $response['data'][] = array(
+                        $no,
+                        $val->kode,
+                        $val->nama,
+                        $val->tanggal,
+                        "Rp. ".number_format($val->jumlah, 0, ',', '.'),
+                        $val->operator,
+                        $val->keterangan,
+                        $edit." ".$delete
+                    );
+                    $no++;	
+                }
+            }
+        }
+        $this->db->select("a.id");
+        $this->db->join("m_pengeluaran b", "b.id=a.idm_pengeluaran", "left");
+        $this->db->where("a.status_delete", 0);
+        if($jenis != 0) {
+            $this->db->where("a.idm_pengeluaran", $jenis);
+        }
+        if($tanggal_awal != 0) {
+            $this->db->where("a.tanggal >=", "$tanggal_awal");
+        }
+        if($tanggal_akhir != 0) {
+            $this->db->where("a.tanggal <=", "$tanggal_akhir");
+        }
+        $this->db->like("CONCAT_WS(' ', a.kode, b.nama)", $request->like, "both");
+        $response["recordsFiltered"] = $this->db->get("pengeluaran a")->num_rows();
 
-	$join['data'][] = array(
-		'table' => 'm_pengeluaran b',
-		'join'	=> 'b.id=a.idm_pengeluaran',
-		'type'	=> 'left'
-	);
+        $this->db->select("a.id");
+        $this->db->join("m_pengeluaran b", "b.id=a.idm_pengeluaran", "left");
+        $this->db->where("a.status_delete", 0);
+        if($jenis != 0) {
+            $this->db->where("a.idm_pengeluaran", $jenis);
+        }
+        if($tanggal_awal != 0) {
+            $this->db->where("a.tanggal >=", "$tanggal_awal");
+        }
+        if($tanggal_akhir != 0) {
+            $this->db->where("a.tanggal <=", "$tanggal_akhir");
+        }
+        $response["recordsTotal"] = $this->db->get("pengeluaran a")->num_rows();
+        $response["start"] = $this->input->get("start", true);
 
-	$where['data'][]=array(
-		'column'	=>'a.status_delete',
-		'param'		=>0
-	);
-
-	$query_total = $this->Modelku->select($select,'pengeluaran a',NULL,NULL,NULL,$join,$where);
-	$query_filter = $this->Modelku->select($select,'pengeluaran a',NULL,$where_like,$order,$join,$where);
-	$query = $this->Modelku->select($select,'pengeluaran a',$limit,$where_like,$order,$join,$where);
-	$response['data'] = array();
-	if ($query<>false) {
-		$no = $limit['start']+1;
-		foreach ($query->result() as $val) {
-			if ($val->id>0) {
-                $edit = '<button class="btn btn-circle btn-sm btn-success" type="button" onclick="edit_data('.$val->id.')"><i class="fas fa-edit"></i></button>';
-                $delete = '<button class="btn btn-circle btn-sm btn-danger" type="button" onclick="delete_data('.$val->id.')"><i class="fas fa-trash"></i></button>';
-				
-				$response['data'][] = array(
-                    $no,
-                    $val->kode,
-                    $val->nama,
-                    $val->tanggal,
-                    "Rp. ".number_format($val->jumlah, 0, ',', '.'),
-                    $val->operator,
-                    $edit." ".$delete
-				);
-				$no++;	
-			}
-		}
-	}
-
-	$response['recordsTotal'] = 0;
-	if ($query_total<>false) {
-		$response['recordsTotal'] = $query_total->num_rows();
-	}
-	$response['recordsFiltered'] = 0;
-	if ($query_filter<>false) {
-		$response['recordsFiltered'] = $query_filter->num_rows();
-	}
-
-	echo json_encode($response);
+        echo json_encode($response);
 	}
 
     public function tambah() {
@@ -143,6 +162,7 @@ class Pengeluaran extends CI_Controller {
             'tanggal' => $this->input->post('tanggal'),
             'jumlah' => $this->_convert($this->input->post('jumlah')),
             'operator' => $this->session->userdata("username"),
+            'keterangan' => $this->input->post('keterangan'),
         ];
 
         return $data;
@@ -185,6 +205,7 @@ class Pengeluaran extends CI_Controller {
 			'tanggal' => $query->tanggal,
 			'jumlah' => $query->jumlah,
 			'operator' => $query->operator,
+			'keterangan' => $query->keterangan,
 			'nama' => $query->nama,
         ];
 
@@ -208,15 +229,39 @@ class Pengeluaran extends CI_Controller {
 
 		echo json_encode($response);
     }
-    public function get_select_jenis()
+    public function get_select_jenis($sts = 0)
     {
         $this->db->select("a.id, CONCAT(a.nama) as text");
         $this->db->where("a.status_delete", 0);
+        if($sts == 0){
+            $this->db->where("a.id != 1");
+        }
         $this->db->like("CONCAT_WS(' ', a.nama)", $this->input->get('q'));
         $this->db->limit(50);
         $response["items"] = $this->db->get("m_pengeluaran a")->result();
         
         echo json_encode($response);
+    }
+
+    public function print($tanggal_awal, $tanggal_akhir, $jenis) {
+        $this->db->select("a.*, b.nama");
+        $this->db->join("m_pengeluaran b", "b.id=a.idm_pengeluaran", "left");
+        $this->db->where("a.status_delete", 0);
+        if($tanggal_awal != 0) {
+            $this->db->where("a.tanggal >=", "$tanggal_awal");
+        }
+        if($tanggal_akhir != 0) {
+            $this->db->where("a.tanggal <=", "$tanggal_akhir");
+        }
+        if($jenis != 0) {
+            $this->db->where("a.idm_pengeluaran", "$jenis");
+        }
+        $this->db->where("a.status_delete", 0);
+        $data['data'] = $this->db->get("pengeluaran a")->result();
+        $data['tanggal_awal'] = $tanggal_awal == 0 ? '00-00-0000' : date("d M Y", strtotime($tanggal_awal));
+        $data['tanggal_akhir'] = $tanggal_akhir == 0 ? '00-00-0000' : date("d M Y", strtotime($tanggal_akhir));
+        $data['judul'] = 'Pengeluaran';
+        $this->load->view('admin/print/pengeluaran', $data);
     }
 
 }

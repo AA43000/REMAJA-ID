@@ -16,15 +16,37 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
+                <div class="row">
+                  <div class="col-6">
+                      <div class="form-group">
+                          <label for="tanggal">Tanggal</label>
+                          <div class="row">
+                              <input type="date" class="form-control col-5" id="tanggal_awal" name="tanggal_awal" onchange="$('#tanggal_akhir').prop('min', this.value), load_data()">
+                              <span class="col-1 text-center">to</span>
+                              <input type="date" class="form-control col-5" id="tanggal_akhir" name="tanggal_akhir" onchange="$('#tanggal_awal').prop('max', this.value), load_data()">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label for="i_jenis">Jenis</label>
+                      <select name="i_jenis" id="i_jenis" class="form-control" style="width: 100%" onchange="load_data()"></select>  
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-secondary mt-4" type="button" onclick="print()">Print</button>
+                  </div>
+                </div>
               <table class="table table-bordered" id="table1" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th width="10%">No</th>
                       <th width="10%">Kode</th>
-                      <th width="20%">Jenis</th>
+                      <th width="10%">Jenis</th>
                       <th width="20%">tanggal</th>
                       <th width="20%">jumlah</th>
                       <th width="10%">Operator</th>
+                      <th width="10%">Keterangan</th>
                       <th width="10%">Action</th>
                     </tr>
                   </thead>
@@ -32,10 +54,11 @@
                   <tr>
                     <th width="10%">No</th>
                       <th width="10%">Kode</th>
-                      <th width="20%">Jenis</th>
+                      <th width="10%">Jenis</th>
                       <th width="20%">tanggal</th>
                       <th width="20%">jumlah</th>
                       <th width="10%">Operator</th>
+                      <th width="10%">Keterangan</th>
                       <th width="10%">Action</th>
                     </tr>
                   </tfoot>
@@ -76,6 +99,10 @@
           <div class="form-group">
             <label for="jumlah">Jumlah</label>
             <input type="text" class="form-control" id="jumlah" name="jumlah">
+          </div>
+          <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
           </div>
 
         </form>
@@ -119,14 +146,42 @@
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
+
+    function print() {
+      var tanggal_awal = $("#tanggal_awal").val();
+      var tanggal_akhir = $("#tanggal_akhir").val();
+      var i_jenis = $("#i_jenis").val();
+      if(tanggal_awal == "") {
+        tanggal_awal = 0;
+      }
+      if(tanggal_akhir == "") {
+        tanggal_akhir = 0;
+      }
+      if(i_jenis == "") {
+        i_jenis = 0;
+      }
+      window.open("<?= base_url() ?>Pemasukan/print/"+tanggal_awal+"/"+tanggal_akhir+"/"+i_jenis);
+    }
     
     function load_data() {
+      var tanggal_awal = $("#tanggal_awal").val();
+      var tanggal_akhir = $("#tanggal_akhir").val();
+      var i_jenis = $("#i_jenis").val();
+      if(tanggal_awal == "") {
+        tanggal_awal = 0;
+      }
+      if(tanggal_akhir == "") {
+        tanggal_akhir = 0;
+      }
+      if(i_jenis == "") {
+        i_jenis = 0;
+      }
         $("#table1").DataTable({
             destroy: true,
             "processing" : true,
             "serverSide" : true,
             ajax :{
-                url: "<?= base_url('Pemasukan/load_data') ?>"
+                url: "<?= base_url('Pemasukan/load_data/') ?>"+i_jenis+"/"+tanggal_awal+"/"+tanggal_akhir
             },
             "columns" :[
                 {"name" : "id"},
@@ -135,6 +190,7 @@
                 {"name" : "tanggal"},
                 {"name" : "jumlah"},
                 {"name" : "operator"},
+                {"name" : "keterangan"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
@@ -175,6 +231,7 @@
       $("#id").val(0);
       $("#idm_pemasukan option").remove();
       $("#jumlah").val(0);
+      $("#keterangan").val("");
       $("#tanggal").val("<?= date("Y-m-d") ?>");
     }
 
@@ -186,6 +243,7 @@
         }).done(function(data) {
             $("#formModal").modal('show');
             $("#tanggal").val(data.value.tanggal);
+            $("#keterangan").val(data.value.keterangan);
             $("#jumlah").val(formatrupiah(data.value.jumlah));
             if(Number(data.value.idm_pemasukan) > 0) {
               $("#idm_pemasukan").append("<option value='"+data.value.idm_pemasukan+"'>"+data.value.nama+"</option>");
@@ -234,6 +292,36 @@
             allowClear: true,
             ajax: {
                 url: '<?php echo site_url("Pemasukan/get_select_jenis"); ?>',
+                dataType: 'json',
+                delay: 100,
+                cache: true,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                }
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 0,
+            templateResult: FormatResult,
+            templateSelection: FormatSelection,
+        });
+        $('#i_jenis').select2({
+            placeholder: 'Pilih Jenis Pemasukan',
+            multiple: false,
+            allowClear: true,
+            ajax: {
+                url: '<?php echo site_url("Pemasukan/get_select_jenis/"); ?>'+1,
                 dataType: 'json',
                 delay: 100,
                 cache: true,
