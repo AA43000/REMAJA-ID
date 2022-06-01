@@ -111,12 +111,16 @@
   <script src="<?= base_url('assets/') ?>vendor/select2/select2.full.js"></script>
   <script src="<?= base_url() ?>assets/vendor/venobox/venobox.min.js"></script>
   <script src="<?= base_url() ?>assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script>
+function FormatResult(data) {
+    markup = '<div>'+data.text+'</div>';
+    return markup;
+}
 
-  <!-- Page level custom scripts -->
-  <script src="<?= base_url('assets/') ?>js/demo/chart-bar-demo.js"></script>
-  <script src="<?= base_url('assets/') ?>js/demo/chart-area-demo.js"></script>
-  <script src="<?= base_url('assets/') ?>js/demo/chart-pie-demo.js"></script>
-
+function FormatSelection(data) {
+    return data.text;
+}
+</script>
 </body>
 
 </html>
