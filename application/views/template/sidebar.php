@@ -73,9 +73,15 @@
         </a>
         <div id="bendahara" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Bendahara:</h6>
-            <a class="collapse-item" href="utilities-color.html">Iuran</a>
-            <a class="collapse-item" href="utilities-border.html">Pengeluaran</a>
+            <h6 class="collapse-header">Master:</h6>
+            <a class="collapse-item" href="<?= base_url() ?>Jumlah_kas">Jumlah Kas</a>
+            <a class="collapse-item" href="<?= base_url() ?>M_pemasukan">Pemasukan</a>
+            <a class="collapse-item" href="<?= base_url() ?>M_pengeluaran">Pengeluaran</a>
+            <h6 class="collapse-header">Transaksi:</h6>
+            <a class="collapse-item" href="<?= base_url() ?>Kas">Kas</a>
+            <a class="collapse-item" href="<?= base_url() ?>Pemasukan">Pemasukan</a>
+            <a class="collapse-item" href="<?= base_url() ?>Pengeluaran">Pengeluaran</a>
+            <!-- <a class="collapse-item" href="<?= base_url() ?>Laporan_keuangan">Laporan Keuangan</a> -->
           </div>
         </div>
       </li>
@@ -89,12 +95,13 @@
         <div id="petugas" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Tampilan:</h6>
-            <a class="collapse-item" href="utilities-color.html">Aplikasi</a>
-            <a class="collapse-item" href="utilities-border.html">Slide</a>
-            <a class="collapse-item" href="utilities-animation.html">About</a>
-            <a class="collapse-item" href="utilities-other.html">Team</a>
-            <a class="collapse-item" href="utilities-other.html">Contact Us</a>
-            <a class="collapse-item" href="utilities-other.html">Portfolio</a>
+            <a class="collapse-item" href="<?= base_url() ?>Jenis_kegiatan">Jenis Kegiatan</a>
+            <a class="collapse-item" href="<?= base_url() ?>Kegiatan">Kegiatan</a>
+            <a class="collapse-item" href="<?= base_url() ?>">Rutinan</a>
+            <a class="collapse-item" href="<?= base_url() ?>">Unit</a>
+            <a class="collapse-item" href="<?= base_url() ?>">Data Pinjaman</a>
+            <!-- <a class="collapse-item" href="utilities-other.html">Contact Us</a>
+            <a class="collapse-item" href="utilities-other.html">Portfolio</a> -->
           </div>
         </div>
       </li>

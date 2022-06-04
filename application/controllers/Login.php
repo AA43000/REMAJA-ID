@@ -68,7 +68,11 @@ class Login extends CI_Controller {
 	public function masuk() {
 		$username = $this->input->post("username", TRUE);
 		$password = $this->input->post("password", TRUE);
-		$users = $this->db->query("SELECT * FROM user WHERE username = '$username' AND status_delete = 0")->row();
+        $this->db->select('*');
+        $this->db->where('username', $username);
+        $this->db->where('status_delete', 0);
+        $users = $this->db->get('user')->row();
+		// $users = $this->db->query("SELECT * FROM user WHERE username = '$username' AND status_delete = 0")->row();
 		
 		if ($users) {
 			if(password_verify($password, $users->password)) {
