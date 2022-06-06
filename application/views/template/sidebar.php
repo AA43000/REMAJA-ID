@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>welcome/admin">
         <div class="sidebar-brand-icon">
           <i class="fas fa-users"></i>
         </div>
@@ -13,7 +13,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?= base_url() ?>welcome/admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -97,7 +97,7 @@
             <h6 class="collapse-header">Custom Tampilan:</h6>
             <a class="collapse-item" href="<?= base_url() ?>Jenis_kegiatan">Jenis Kegiatan</a>
             <a class="collapse-item" href="<?= base_url() ?>Kegiatan">Kegiatan</a>
-            <a class="collapse-item" href="<?= base_url() ?>">Rutinan</a>
+            <a class="collapse-item" href="<?= base_url() ?>Pengumuman">Pengumuman</a>
             <a class="collapse-item" href="<?= base_url() ?>">Unit</a>
             <a class="collapse-item" href="<?= base_url() ?>">Data Pinjaman</a>
             <!-- <a class="collapse-item" href="utilities-other.html">Contact Us</a>

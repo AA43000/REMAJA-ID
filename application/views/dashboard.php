@@ -19,7 +19,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Anggaran</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= $anggaran ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -79,7 +79,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jumlah Anggota</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_anggota ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -99,25 +99,11 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                  <h6 class="m-0 font-weight-bold text-primary">Pengumuman</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
+                <div class="card-body row w-100" id="pengumuman">
+                  
                 </div>
               </div>
             </div>
@@ -127,36 +113,21 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                  <h6 class="m-0 font-weight-bold text-primary">Riwayat Kas</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
+                <small>hanya 5 hari terakhir yang tampil</small>
+                  <table class="table table-striped">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Tanggal</th>
+                        <th>Jumlah</th>
+                      </tr>
+                    </thead>
+                    <tbody id="riwayat_kas">
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -166,9 +137,100 @@
           
           </div>
     <!-- /.container-fluid -->
-  <script src="<?= base_url('assets/') ?>vendor/chart.js/Chart.min.js"></script>
-<!-- Page level custom scripts -->
-  <script src="<?= base_url('assets/') ?>js/demo/chart-bar-demo.js"></script>
-  <script src="<?= base_url('assets/') ?>js/demo/chart-area-demo.js"></script>
-  <script src="<?= base_url('assets/') ?>js/demo/chart-pie-demo.js"></script>
-  <script src="<?= base_url('assets/') ?>js/demo/datatables-demo.js"></script>
+     <!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pengumuman</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-right">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
+        <p>Melalui pesan ini kami ingatkan kepada seluruh anggota karang taruna <b>kampala</b> untuk dapat berkenan hadir pada <span id="nama"></span> yang akan dilaksanakan pada:</p>
+        <span>Tanggal: <span id="tanggal"></span></span><br>
+        <span>Pukul: <span id="waktu"></span> WIB - selesai</span><br>
+        <span>Tempat: <span id="tempat"></span></span><br>
+        <span>Keterangan: <span id="keterangan"></span></span>
+        <p></p>
+        <p>Demikian pesan ini saya sampaikan, atas perhatiannya saya ucapkan terimakasih.</p>
+        <p class="text-right">وَالسَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+        load_data();
+        load_kas();
+        $('#formModal').on('hidden.bs.modal', function (e) {
+            load_data();
+        });
+    });
+    function load_data() {
+        $.ajax({
+            url: "<?= base_url() ?>Welcome/load_data",
+            dataType: "json",
+            type: "post",
+            success: function(data) {
+                var result = '';
+                for(var i = 0;i<data.data.length;i++) {
+                    var notif = '';
+                    if(data.data[i].notif == 1) {
+                        notif = 'background-color: #e5eaf7';
+                    }
+                    result+= '<div class="col-lg-4 py-1">';
+                    result+= '    <div class="card" style="width: 100%; cursor: pointer; '+notif+'" onclick="show_modal('+data.data[i].id+')">';
+                    result+= '        <div class="card-body">';
+                    result+= '            <h5 class="card-title">'+data.data[i].nama+'</h5>';
+                    result+= '            <h6 class="card-subtitle mb-2 text-muted">'+data.data[i].tanggal+'</h6>';
+                    result+= '            <p class="card-text">'+data.data[i].keterangan+'</p>';
+                    result+= '        </div>  ';
+                    result+= '    </div>';
+                    result+= '</div>';
+                }
+                $("#pengumuman").html(result);
+            }
+        })
+    }
+    function show_modal(id) {
+        $.ajax({
+            url: "<?= base_url() ?>Welcome/load_data/"+id,
+            dataType: "json",
+            success: function(data) {
+              $("#nama").html(data.data.nama);
+              $("#tanggal").html(data.data.tanggal);
+              $("#keterangan").html(data.data.keterangan);
+              $("#tempat").html(data.data.tempat);
+              $("#waktu").html(data.data.waktu);
+              $("#formModal").modal("show");
+            }
+        })
+    }
+    function load_kas() {
+      $.ajax({
+        url: "<?= base_url() ?>Welcome/load_kas",
+        dataType: "json",
+        success: function(data) {
+          var result = '';
+          if(data.data.length > 0) {
+            for(var i = 0; i<data.data.length;i++) {
+              result += '<tr>';
+              result += '<td>'+data.data[i].tanggal+'</td>';
+              result += '<td>Rp. '+data.data[i].jumlah+'</td>';
+              result += '</tr>';
+            }
+          } else {
+            result = '<td colspan="2">Data tidak ditemukan</td>';
+          }
+          $("#riwayat_kas").html(result);
+        }
+      })
+    }
+</script>

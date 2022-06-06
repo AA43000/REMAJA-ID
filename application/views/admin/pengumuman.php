@@ -3,12 +3,12 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Jenis Kegiatan</h1>
+          <h1 class="h3 mb-2 text-gray-800">Pengumuman</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex">
-              <h6 class="m-0 font-weight-bold text-primary">Tabel Jenis Kegiatan</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tabel Pengumuman</h6>
               <a href="#" class="btn btn-primary btn-icon-split btn-sm ml-3" data-toggle="modal" data-target="#formModal">
                 <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                 <span class="text">Tambah data</span>
@@ -20,14 +20,22 @@
                   <thead>
                     <tr>
                       <th width="10%">No</th>
-                      <th width="80%">Nama</th>
+                      <th width="20%">Nama</th>
+                      <th width="10%">Tanggal</th>
+                      <th width="10%">Waktu</th>
+                      <th width="20%">Tempat</th>
+                      <th width="20%">Keterangan</th>
                       <th width="10%">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                   <tr>
                       <th width="10%">No</th>
-                      <th width="80%">Nama</th>
+                      <th width="20%">Nama</th>
+                      <th width="10%">Tanggal</th>
+                      <th width="10%">Waktu</th>
+                      <th width="20%">Tempat</th>
+                      <th width="20%">Keterangan</th>
                       <th width="10%">Action</th>
                     </tr>
                   </tfoot>
@@ -58,8 +66,24 @@
             <input type="hidden" name="id" id="id" value="">
 
           <div class="form-group">
-            <label for="header">Nama</label>
+            <label for="nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama">
+          </div>
+          <div class="form-group">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" class="form-control" id="tanggal" name="tanggal" format="hh:mm">
+          </div>
+          <div class="form-group">
+            <label for="waktu">Waktu</label>
+            <input type="time" class="form-control" id="waktu" name="waktu" format="hh:mm">
+          </div>
+          <div class="form-group">
+            <label for="tempat">Tempat</label>
+            <input type="text" class="form-control" id="tempat" name="tempat">
+          </div>
+          <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
           </div>
 
         </form>
@@ -75,6 +99,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
         load_data();
+        $("[type='time']").flatpickr({
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            allowInput: true
+        });
         $('#formModal').on('hidden.bs.modal', function (e) {
             reset_form();
         });
@@ -86,11 +117,15 @@
             "processing" : true,
             "serverSide" : true,
             ajax :{
-                url: "<?= base_url('Jenis_kegiatan/load_data') ?>"
+                url: "<?= base_url('Pengumuman/load_data') ?>"
             },
             "columns" :[
                 {"name" : "id"},
                 {"name" : "nama"},
+                {"name" : "tanggal"},
+                {"name" : "waktu"},
+                {"name" : "tempat"},
+                {"name" : "keterangan"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
@@ -103,7 +138,7 @@
     function save() {
       var formData = new FormData($("#formAll")[0]);
       $.ajax({
-        url: "<?= base_url('Jenis_kegiatan/tambah') ?>",
+        url: "<?= base_url('Pengumuman/tambah') ?>",
         data: formData,
         contentType: false,
         processData: false,
@@ -130,16 +165,24 @@
     function reset_form() {
     $("#id").val(0);
       $("#nama").val("");
+      $("#tanggal").val("");
+      $("#waktu").val("");
+      $("#tempat").val("");
+      $("#keterangan").val("");
     }
 
     function edit_data(id) {
         $.ajax({
-            url: "<?= base_url('Jenis_kegiatan/edit_data/') ?>"+id,
+            url: "<?= base_url('Pengumuman/edit_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
         }).done(function(data) {
             $("#formModal").modal('show');
             $("#nama").val(data.value.nama);
+            $("#tanggal").val(data.value.tanggal);
+            $("#waktu").val(data.value.waktu);
+            $("#tempat").val(data.value.tempat);
+            $("#keterangan").val(data.value.keterangan);
             $("#id").val(data.value.id);
         });
     }
@@ -155,7 +198,7 @@
       .then((willDelete) => {
         if (willDelete) {
           $.ajax({
-            url: "<?= base_url('Jenis_kegiatan/delete_data/') ?>"+id,
+            url: "<?= base_url('Pengumuman/delete_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
           }).done(function(data) {

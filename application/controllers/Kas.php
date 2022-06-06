@@ -359,8 +359,20 @@ class Kas extends CI_Controller {
 		$data['status_delete'] = 1;
 		$where = [
 			'id' => $id
+        ];
+        $where2 = [
+			'id_kas' => $id
 		];
-		$delete = $this->Modelku->update('kas', $data, $where);
+        $this->Modelku->update('kas_detail', $data, $where2);
+        $delete = $this->Modelku->update('kas', $data, $where);
+        $this->db->select("b.id");
+        $this->db->join("pemasukan b", "b.tanggal=a.tanggal", "left");
+        $this->db->where("a.id", $id);
+        $this->db->where("b.idm_pemasukan", 1);
+        $cek = $this->db->get("kas a")->row();
+        if($cek) {
+            $this->db->update("pemasukan", $data, ["id" => $cek->id]);
+        }
 		if($delete<>false) {
 			$response['status'] = '200';
 			$response['title'] = 'Data telah berhasil dihapus';

@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/select2/select2.min.css">
   <link href="<?= base_url() ?>assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="<?= base_url() ?>assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 </head>
 

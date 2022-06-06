@@ -262,7 +262,7 @@
                 <div class="img-container">
                     <div class="row">
                         <div class="col-md-8">
-                            <img src="" id="sample_image" />
+                            <img src="" id="sample_image" style="width: 100%"/>
                         </div>
                         <div class="col-md-4">
                             <div class="preview"></div>

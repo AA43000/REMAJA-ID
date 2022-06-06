@@ -76,7 +76,6 @@
               </li> -->
               <li><a href="#contact">Contact</a></li>
               <li><a href="<?= base_url('login') ?>">Login</a></li>
-		<li><a href="#"><span><i>3</i></span><i class="bx bx-bell"></i></a></li>
 
             </ul>
           </nav><!-- .nav-menu -->
