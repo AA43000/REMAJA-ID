@@ -98,8 +98,8 @@
             <a class="collapse-item" href="<?= base_url() ?>Jenis_kegiatan">Jenis Kegiatan</a>
             <a class="collapse-item" href="<?= base_url() ?>Kegiatan">Kegiatan</a>
             <a class="collapse-item" href="<?= base_url() ?>Pengumuman">Pengumuman</a>
-            <a class="collapse-item" href="<?= base_url() ?>">Unit</a>
-            <a class="collapse-item" href="<?= base_url() ?>">Data Pinjaman</a>
+            <a class="collapse-item" href="<?= base_url() ?>Unit">Unit</a>
+            <a class="collapse-item" href="<?= base_url() ?>Pinjaman">Data Pinjaman</a>
             <!-- <a class="collapse-item" href="utilities-other.html">Contact Us</a>
             <a class="collapse-item" href="utilities-other.html">Portfolio</a> -->
           </div>

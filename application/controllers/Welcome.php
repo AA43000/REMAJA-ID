@@ -20,6 +20,7 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata("id_user")) { 
 			$data['judul'] = 'Dashboard';
 			$data['jumlah_anggota'] = $this->db->query("SELECT id_user FROM user WHERE status_delete = 0 AND status_approve = 1")->num_rows();
+			$data['jumlah_unit'] = $this->db->query("SELECT id FROM unit WHERE status_delete = 0")->num_rows();
 			$data['anggaran'] = number_format($this->db->query("SELECT jumlah FROM anggaran")->row()->jumlah);
 			$data['konten'] = $this->load->view('dashboard', $data, true);
 			$this->load->view('template/index', $data);

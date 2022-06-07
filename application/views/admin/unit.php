@@ -3,13 +3,12 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Slide</h1>
-          
+          <h1 class="h3 mb-2 text-gray-800">Unit</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex">
-              <h6 class="m-0 font-weight-bold text-primary">Tabel Slide</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tabel Unit</h6>
               <a href="#" class="btn btn-primary btn-icon-split btn-sm ml-3" data-toggle="modal" data-target="#formModal">
                 <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                 <span class="text">Tambah data</span>
@@ -21,23 +20,29 @@
                   <thead>
                     <tr>
                       <th width="10%">No</th>
-                      <th width="20%">Header</th>
-                      <th width="30%">Text</th>
-                      <th width="20%">Image</th>
+                      <th width="20%">Nama</th>
+                      <th width="10%">Merk</th>
+                      <th width="10%">Stok</th>
+                      <th width="10%">Dipinjam</th>
+                      <th width="10%">Sisa</th>
+                      <th width="20%">Keterangan</th>
                       <th width="10%">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                   <tr>
-                        <th>No</th>
-                      <th>Header</th>
-                      <th>Text</th>
-                      <th>Image</th>
-                      <th>Action</th>
+                        <th width="10%">No</th>
+                      <th width="20%">Nama</th>
+                      <th width="10%">Merk</th>
+                      <th width="10%">Stok</th>
+                      <th width="10%">Dipinjam</th>
+                      <th width="10%">Sisa</th>
+                      <th width="20%">Keterangan</th>
+                      <th width="10%">Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                
+                    
                   </tbody>
                 </table>
               </div>
@@ -53,7 +58,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="labelModal">Form tambah data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Form tambah data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,31 +68,29 @@
             <input type="hidden" name="id" id="id" value="">
 
           <div class="form-group">
-            <label for="header">Header</label>
-            <input type="text" class="form-control" id="header" name="header">
+            <label for="nama">Nama</label>
+            <input type="text" class="form-control" id="nama" name="nama">
           </div>
 
           <div class="form-group">
-            <label for="text">Text</label>
-            <textarea name="text" id="text" class="form-control" cols="30" rows="5"></textarea>
+            <label for="merk">Merk</label>
+            <input type="text" name="merk" id="merk" class="form-control"><br>
           </div>
 
           <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" name="image" id="image">
+            <label for="stok">Stok</label>
+            <input type="number" min="0" name="stok" id="stok" class="form-control"><br>
           </div>
-          
-          <div id="image-view" class="d-none">
-            <span>ubah image</span>
-            <div id="src">
-            
-            </div>
+
+          <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
           </div>
 
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="reset_form()">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="save()">Save changes</button>
       </div>
     </div>
@@ -97,10 +100,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         load_data();
-        $("#image").filestyle({
-          btnClass : 'btn-outline-primary',
-          text: 'Pilih Image'
-        });
         $('#formModal').on('hidden.bs.modal', function (e) {
             reset_form();
         });
@@ -112,13 +111,16 @@
             "processing" : true,
             "serverSide" : true,
             ajax :{
-                url: "<?= base_url('slide/load_data') ?>"
+                url: "<?= base_url('Unit/load_data') ?>"
             },
             "columns" :[
-                {"name" : "id_slide"},
-                {"name" : "header"},
-                {"name" : "text"},
-                {"name" : "image"},
+                {"name" : "id"},
+                {"name" : "nama"},
+                {"name" : "merk"},
+                {"name" : "stok"},
+                {"name" : "dipinjam"},
+                {"name" : "sisa"},
+                {"name" : "keterangan"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
@@ -131,7 +133,7 @@
     function save() {
       var formData = new FormData($("#formAll")[0]);
       $.ajax({
-        url: "<?= base_url('Slide/tambah') ?>",
+        url: "<?= base_url('Unit/tambah') ?>",
         data: formData,
         contentType: false,
         processData: false,
@@ -157,30 +159,28 @@
 
     function reset_form() {
     $("#id").val(0);
-      $("#text").val("");
-      $("#header").val("");
-      $("#image").filestyle('clear');
-      $("#image-view").addClass("d-none");
-      $("#labelModal").html("Form tambah data");
+      $("#nama").val("");
+      $("#merk").val("");
+      $("#stok").val("");
+      $("#keterangan").val("");
     }
 
-    function edit_data(id_slide) {
+    function edit_data(id) {
         $.ajax({
-            url: "<?= base_url('Slide/edit_data/') ?>"+id_slide,
+            url: "<?= base_url('Unit/edit_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
         }).done(function(data) {
             $("#formModal").modal('show');
-            $("#header").val(data.value.header);
-            $("#text").val(data.value.text);
-            $("#image-view").removeClass("d-none");
-            $("#src").html(data.value.image);
+            $("#nama").val(data.value.nama);
             $("#id").val(data.value.id);
-            $("#labelModal").html("Form edit data");
+            $("#keterangan").val(data.value.keterangan);
+            $("#merk").val(data.value.merk);
+            $("#stok").val(data.value.stok);
         });
     }
 
-    function delete_data(id_slide){
+    function delete_data(id){
       swal({
         title: "Anda yakin?",
         text: "Data yang telah dihapus tidak dapat dipulihkan!",
@@ -191,7 +191,7 @@
       .then((willDelete) => {
         if (willDelete) {
           $.ajax({
-            url: "<?= base_url('Slide/delete_data/') ?>"+id_slide,
+            url: "<?= base_url('Unit/delete_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
           }).done(function(data) {

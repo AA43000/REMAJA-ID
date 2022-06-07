@@ -3,12 +3,12 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Service</h1>
+          <h1 class="h3 mb-2 text-gray-800">Data Pinjaman</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex">
-              <h6 class="m-0 font-weight-bold text-primary">Tabel Service</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Tabel Data Pinjaman</h6>
               <a href="#" class="btn btn-primary btn-icon-split btn-sm ml-3" data-toggle="modal" data-target="#formModal">
                 <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                 <span class="text">Tambah data</span>
@@ -20,18 +20,26 @@
                   <thead>
                     <tr>
                       <th width="10%">No</th>
-                      <th width="20%">Nama</th>
-                      <th width="30%">Keterangan</th>
-                      <th width="20%">Icon</th>
+                      <th width="10%">Nama Peminjam</th>
+                      <th width="10%">Unit</th>
+                      <th width="10%">No HP</th>
+                      <th width="10%">Jumlah</th>
+                      <th width="10%">Tanggal</th>
+                      <th width="20%">Keterangan</th>
+                      <th width="10%">Status</th>
                       <th width="10%">Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                   <tr>
-                      <th width="10%">No</th>
-                      <th width="20%">Nama</th>
-                      <th width="30%">Keterangan</th>
-                      <th width="20%">Icon</th>
+                        <th width="10%">No</th>
+                      <th width="10%">Nama Peminjam</th>
+                      <th width="10%">Unit</th>
+                      <th width="10%">No HP</th>
+                      <th width="10%">Jumlah</th>
+                      <th width="10%">Tanggal</th>
+                      <th width="20%">Keterangan</th>
+                      <th width="10%">Status</th>
                       <th width="10%">Action</th>
                     </tr>
                   </tfoot>
@@ -62,19 +70,33 @@
             <input type="hidden" name="id" id="id" value="">
 
           <div class="form-group">
-            <label for="header">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama">
+            <label for="id_unit">Unit</label>
+            <select name="id_unit" id="id_unit" class="form-control" style="width: 100%"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="nama">Nama Peminjam</label>
+            <input type="text" class="form-control" id="nama_peminjam" name="nama_peminjam">
+          </div>
+
+          <div class="form-group">
+            <label for="no_hp">No Hp</label>
+            <input type="text" name="no_hp" id="no_hp" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" name="tanggal" id="tanggal" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="jumlah">Jumlah</label>
+            <input type="text" name="jumlah" id="jumlah" class="form-control">
           </div>
 
           <div class="form-group">
             <label for="keterangan">Keterangan</label>
-            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="icon">Icon</label>
-            <input type="text" name="icon" id="icon" class="form-control"><br>
-            <small>*anda bisa mengunjungi <a href="https://themesdesign.in/nazox/layouts/vertical/icons-remix.html">https://themesdesign.in/nazox/layouts/vertical/icons-remix.html</a> untuk mendapatkan lebih banyak icon</small>
+            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
           </div>
 
         </form>
@@ -90,6 +112,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         load_data();
+        load_select_unit();
         $('#formModal').on('hidden.bs.modal', function (e) {
             reset_form();
         });
@@ -101,13 +124,17 @@
             "processing" : true,
             "serverSide" : true,
             ajax :{
-                url: "<?= base_url('Service/load_data') ?>"
+                url: "<?= base_url('Pinjaman/load_data') ?>"
             },
             "columns" :[
-                {"name" : "id_service"},
+                {"name" : "id"},
+                {"name" : "nama_peminjam"},
                 {"name" : "nama"},
+                {"name" : "no_hp"},
+                {"name" : "jumlah"},
+                {"name" : "tanggal"},
                 {"name" : "keterangan"},
-                {"name" : "icon"},
+                {"name" : "status"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
             ],
             "order" : [
@@ -120,7 +147,7 @@
     function save() {
       var formData = new FormData($("#formAll")[0]);
       $.ajax({
-        url: "<?= base_url('Service/tambah') ?>",
+        url: "<?= base_url('Pinjaman/tambah') ?>",
         data: formData,
         contentType: false,
         processData: false,
@@ -146,22 +173,30 @@
 
     function reset_form() {
     $("#id").val(0);
-      $("#nama").val("");
+      $("#nama_peminjam").val("");
+      $("#tanggal").val("");
+      $("#no_hp").val("");
+      $("#jumlah").val("");
       $("#keterangan").val("");
-      $("#icon").val("");
+      $("#id_unit option").remove();
     }
 
     function edit_data(id) {
         $.ajax({
-            url: "<?= base_url('Service/edit_data/') ?>"+id,
+            url: "<?= base_url('Pinjaman/edit_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
         }).done(function(data) {
             $("#formModal").modal('show');
-            $("#nama").val(data.value.nama);
+            $("#nama_peminjam").val(data.value.nama_peminjam);
             $("#id").val(data.value.id);
             $("#keterangan").val(data.value.keterangan);
-            $("#icon").val(data.value.icon);
+            $("#jumlah").val(data.value.jumlah);
+            $("#tanggal").val(data.value.tanggal);
+            $("#no_hp").val(data.value.no_hp);
+            if(Number(data.value.id_unit) > 0) {
+              $("#id_unit").append("<option value='"+data.value.id_unit+"'>"+data.value.nama+"</option>");
+            }
         });
     }
 
@@ -176,7 +211,7 @@
       .then((willDelete) => {
         if (willDelete) {
           $.ajax({
-            url: "<?= base_url('Service/delete_data/') ?>"+id,
+            url: "<?= base_url('Pinjaman/delete_data/') ?>"+id,
             dataType: 'json',
             type: 'post'
           }).done(function(data) {
@@ -197,5 +232,46 @@
           swal("Data Tidak jadi dihapus!");
         }
       });
+    }
+    function load_select_unit(){
+        $('#id_unit').select2({
+            placeholder: 'Pilih unit',
+            multiple: false,
+            allowClear: true,
+            ajax: {
+                url: '<?php echo site_url("Pinjaman/get_select_unit"); ?>',
+                dataType: 'json',
+                delay: 100,
+                cache: true,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                }
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 0,
+            templateResult: FormatResult,
+            templateSelection: FormatSelection,
+        });
+    }
+    function update_sts(id) {
+      $.ajax({
+        url: "<?= base_url() ?>Pinjaman/update_sts/"+id,
+        dataType: "json",
+        success: function(data) {
+          load_data();
+        }
+      })
     }
 </script>
