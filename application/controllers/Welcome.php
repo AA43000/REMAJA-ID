@@ -13,6 +13,10 @@ class Welcome extends CI_Controller {
 	{	
 		$this->load->view('welcome_message2');
 	}
+	public function view_all()
+	{	
+		$this->load->view('all_event');
+	}
 
 	public function admin() {
 		if($this->session->userdata("id_user")) { 

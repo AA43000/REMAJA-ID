@@ -60,7 +60,7 @@
         </section>
         <!-- Projects-->
         <section class="projects-section bg-light" id="events">
-            <?php $kegiatan = $this->db->query("SELECT * FROM kegiatan WHERE status_delete = 0 ORDER BY id desc LIMIT 3")->result_array(); ?>
+            <?php $kegiatan = $this->db->query("SELECT * FROM kegiatan WHERE status_delete = 0 ORDER BY tanggal desc LIMIT 3")->result_array(); ?>
             <div class="container">
                 <!-- Featured Project Row-->
                 <div class="row align-items-center no-gutters mb-4 mb-lg-5">

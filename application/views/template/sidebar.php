@@ -42,7 +42,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tampilan" aria-expanded="true" aria-controls="tampilan">
           <i class="fas fa-fw fa-tv"></i>
           <span>Tampilan</span>
@@ -54,12 +54,11 @@
             <a class="collapse-item" href="<?= base_url('slide/') ?>">Slide</a>
             <a class="collapse-item" href="<?= base_url('about/') ?>">About</a>
             <a class="collapse-item" href="<?= base_url('service/') ?>">service</a>
-            <!-- <a class="collapse-item" href="<?= base_url('portfolio/') ?>">Portfolio</a> -->
             <a class="collapse-item" href="<?= base_url('team/') ?>">Team</a>
             <a class="collapse-item" href="<?= base_url('contact/') ?>">Contact Us</a>
           </div>
         </div>
-      </li>
+      </li> -->
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
