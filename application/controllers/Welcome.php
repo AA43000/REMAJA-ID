@@ -11,9 +11,7 @@ class Welcome extends CI_Controller {
 	}
 	public function index()
 	{	
-		$data['slide'] = $this->db->query("SELECT * FROM slide WHERE status_delete = 0")->result();
-		$data['aplikasi'] = $this->db->query("SELECT * FROM aplikasi WHERE id_aplikasi = 1")->row();
-		$this->load->view('welcome_message', $data);
+		$this->load->view('welcome_message2');
 	}
 
 	public function admin() {

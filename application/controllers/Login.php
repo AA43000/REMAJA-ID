@@ -55,6 +55,7 @@ class Login extends CI_Controller {
 					'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
 					'nomor_wa' => $this->input->post('nomor_wa'),
 					'user_type' => $this->input->post('user_type'),
+					'image' => 'no-image.svg',
 					'status_approve' => 0
 				);
 				$this->db->insert('user', $dataAkun);

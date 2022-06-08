@@ -111,7 +111,7 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                <small>hanya 5 hari terakhir yang tampil</small>
+                <small>hanya 5 data terakhir yang tampil</small>
                   <table class="table table-striped">
                     <thead class="thead-light">
                       <tr>

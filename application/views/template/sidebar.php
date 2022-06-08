@@ -36,7 +36,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pengaturan:</h6>
             <a class="collapse-item" href="<?= base_url('User') ?>">User</a>
-            <a class="collapse-item" href="<?= base_url('User_type') ?>">User Type</a>
+            <!-- <a class="collapse-item" href="<?php // echo base_url('User_type') ?>">User Type</a> -->
           </div>
         </div>
       </li>
@@ -86,7 +86,7 @@
         </div>
       </li>
       <?php } 
-      if($this->session->userdata("user_type") == 4 || $this->session->userdata("user_type") == 1) { ?>
+      if($this->session->userdata("user_type") == 3 || $this->session->userdata("user_type") == 1) { ?>
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#petugas" aria-expanded="true" aria-controls="petugas">
           <i class="fas fa-fw fa-wrench"></i>

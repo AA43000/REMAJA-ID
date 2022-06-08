@@ -56,24 +56,6 @@
               <li><a href="#services">Services</a></li>
               <li><a href="#portfolio">Portfolio</a></li>
               <li><a href="#team">Team</a></li>
-              <!-- <li><a href="blog.html">Blog</a></li> -->
-              <!-- <li class="drop-down"><a href="">Drop Down</a>
-                <ul>
-                  <li><a href="#">Drop Down 1</a></li>
-                  <li class="drop-down"><a href="#">Deep Drop Down</a>
-                    <ul>
-                      <li><a href="#">Deep Drop Down 1</a></li>
-                      <li><a href="#">Deep Drop Down 2</a></li>
-                      <li><a href="#">Deep Drop Down 3</a></li>
-                      <li><a href="#">Deep Drop Down 4</a></li>
-                      <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Drop Down 2</a></li>
-                  <li><a href="#">Drop Down 3</a></li>
-                  <li><a href="#">Drop Down 4</a></li>
-                </ul>
-              </li> -->
               <li><a href="#contact">Contact</a></li>
               <li><a href="<?= base_url('login') ?>">Login</a></li>
 
@@ -108,28 +90,6 @@
         </div>
     <?php $no++;
   endforeach; ?>
-
-        <!-- Slide 2 -->
-        <!-- <div class="carousel-item active" style="background-image: url(<?= base_url() ?>assets/img/slide/slide-2.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animated fadeInDown">Lorem Ipsum Dolor</h2>
-              <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animated fadeInUp scrollto">Read More</a>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Slide 3 -->
-        <!-- <div class="carousel-item" style="background-image: url(<?= base_url() ?>assets/img/slide/slide-3.jpg)">
-          <div class="carousel-container">
-            <div class="container">
-              <h2 class="animated fadeInDown">Sequi ea ut et est quaerat</h2>
-              <p class="animated fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animated fadeInUp scrollto">Read More</a>
-            </div>
-          </div>
-        </div> -->
 
       </div>
 
@@ -172,115 +132,13 @@
             </div>
     <?php endforeach; ?>
 
-            <!-- <div class="icon-box">
-              <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">Dine Pad</a></h4>
-              <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-            </div> -->
-
           </div>
         </div>
 
       </div>
     </section><!-- End About Section -->
     <?php } ?>
-    <!-- ======= Skills Section ======= -->
-    <!-- <section id="skills" class="skills">
-      <div class="container-fluid">
-
-        <div class="row justify-content-center skills-content">
-
-          <div class="col-xl-5 col-lg-6">
-
-            <div class="progress">
-              <span class="skill">HTML <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">CSS <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">JavaScript <i class="val">75%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-xl-5 col-lg-6">
-
-            <div class="progress">
-              <span class="skill">PHP <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">WordPress/CMS <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Photoshop <i class="val">55%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>End Skills Section -->
-
-    <!-- ======= Counts Section ======= -->
-    <!-- <section id="counts" class="counts section-bg">
-      <div class="container-fluid">
-
-        <div class="row counters">
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">232</span>
-            <p>Clients</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">521</span>
-            <p>Projects</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">1,463</span>
-            <p>Hours Of Support</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-toggle="counter-up">15</span>
-            <p>Hard Workers</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>End Counts Section -->
+    
       <?php if($aplikasi->service > 0) { ?>
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -303,31 +161,6 @@
                 <p class="description"><?= $svc->keterangan ?></p>
               </div>
             <?php endforeach; ?>
-              <!-- <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-stack-line"></i></div>
-                <h4 class="title"><a href="">Dolor Sitema</a></h4>
-                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-              </div>
-              <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-markup-line"></i></div>
-                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-              </div>
-              <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-shape-line"></i></div>
-                <h4 class="title"><a href="">Magni Dolores</a></h4>
-                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-              </div>
-              <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-fingerprint-line"></i></div>
-                <h4 class="title"><a href="">Nemo Enim</a></h4>
-                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-              </div>
-              <div class="col-lg-4 col-md-6 icon-box">
-                <div class="icon"><i class="ri-body-scan-line"></i></div>
-                <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-              </div> -->
             </div>
           </div>
         </div>
@@ -335,19 +168,7 @@
       </div>
     </section><!-- End Services Section -->
       <?php } ?>
-    <!-- ======= Cta Section ======= -->
-    <!-- <section id="cta" class="cta">
-      <div class="container">
 
-        <div class="text-center">
-          <h3>Call To Action</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn" href="#">Call To Action</a>
-        </div>
-
-      </div>
-    </section> -->
-    <!-- End Cta Section -->
         <?php if($aplikasi->portfolio > 0) { ?>
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
@@ -387,7 +208,7 @@
                     <p><?= $row->jenis_kegiatan ?></p>
                     <div class="portfolio-links">
                       <a href="<?= base_url() ?>assets/image/kegiatan/<?= $row->image ?>" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
-                      <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                      <a href="<?= base_url() ?>Welcome/detail/<?= $row->id ?>" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                   </div>
                 </div>
@@ -402,106 +223,7 @@
       </div>
     </section><!-- End Portfolio Section -->
         <?php } ?>
-    <!-- ======= Testimonials Section ======= -->
-    <!-- <section id="testimonials" class="testimonials section-bg">
-      <div class="container-fluid">
 
-        <div class="section-title">
-          <h2>Testimonials</h2>
-          <h3>What They <span>Are Saying</span> About Us</h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-xl-10">
-
-            <div class="row">
-
-              <div class="col-lg-6">
-                <div class="testimonial-item">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="testimonial-item mt-4 mt-lg-0">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="testimonial-item mt-4">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="testimonial-item mt-4">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="testimonial-item mt-4">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="testimonial-item mt-4">
-                  <img src="<?= base_url() ?>assets/img/testimonials/testimonials-6.jpg" class="testimonial-img" alt="">
-                  <h3>Emily Harison</h3>
-                  <h4>Store Owner</h4>
-                  <p>
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur. Sequi officiis ea et quia quidem.
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section> -->
-    <!-- End Testimonials Section -->
           <?php if ($aplikasi->team > 0) { ?>
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
@@ -528,12 +250,6 @@
                       <h4><?= $tm->nama ?></h4>
                       <span><?= $tm->jabatan ?></span>
                     </div>
-                    <!-- <div class="social">
-                      <a href=""><i class="icofont-twitter"></i></a>
-                      <a href=""><i class="icofont-facebook"></i></a>
-                      <a href=""><i class="icofont-instagram"></i></a>
-                      <a href=""><i class="icofont-linkedin"></i></a>
-                    </div> -->
                   </div>
                 </div>
               </div> <!-- End Member Item -->
@@ -582,11 +298,6 @@
                     <h4>Email Us</h4>
                     <p><?= $contact->email ?></p>
                   </div>
-                  <!-- <div class="col-md-6 info d-flex flex-column align-items-stretch">
-                    <i class="bx bx-time-five"></i>
-                    <h4>Working Hours</h4>
-                    <p>Mon - Fri: 9AM to 5PM<br>Sunday: 9AM to 1PM</p>
-                  </div> -->
 
                 </div>
 
@@ -637,90 +348,9 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <!-- <div class="footer-newsletter">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-          </div>
-          <div class="col-lg-6">
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div class="footer-top">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-xl-10">
-            <div class="row">
-
-              <div class="col-lg-3 col-md-6 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                </ul>
-              </div>
-
-              <div class="col-lg-3 col-md-6 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                  <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                </ul>
-              </div>
-
-              <div class="col-lg-3 col-md-6 footer-contact">
-                <h4>Contact Us</h4>
-                <p>
-                  A108 Adam Street <br>
-                  New York, NY 535022<br>
-                  United States <br><br>
-                  <strong>Phone:</strong> +1 5589 55488 55<br>
-                  <strong>Email:</strong> info@example.com<br>
-                </p>
-
-              </div>
-
-              <div class="col-lg-3 col-md-6 footer-info">
-                <h3>About Hidayah</h3>
-                <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-                <div class="social-links mt-3">
-                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                  <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                  <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                  <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                  <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Ahmad Zaeni Mubarok</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        &copy; Copyright <strong><a href="https://aa43000.github.io/">Ahmad Zaeni Mubarok</a></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->

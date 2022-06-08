@@ -75,6 +75,9 @@
                   <div class="text-center">
                     <a class="small" href="<?= base_url('login/register') ?>">Create an Account!</a>
                   </div>
+                  <div class="text-center">
+                    <a class="small" href="<?= base_url() ?>">Back</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -127,11 +130,7 @@
     }
 
     function link(user_type) {
-      if(user_type == 3) {
-        window.location.href = "<?= base_url() ?>";
-      } else {
-        window.location.href = "<?= base_url("welcome/admin") ?>";
-      }
+      window.location.href = "<?= base_url("welcome/admin") ?>";
     }
   </script>
 

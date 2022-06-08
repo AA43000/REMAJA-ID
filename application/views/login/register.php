@@ -58,7 +58,7 @@
                         <small class="text-danger text-sm">*Password belum sama</small>
                     </div>
                     <input type="hidden" name="sts_repeat" id="sts_repeat" value="0">
-                    <input type="hidden" name="user_type" value="3">
+                    <input type="hidden" name="user_type" value="4">
                   </div>
                 </div>
                 <!-- <span class="btn btn-primary btn-user btn-block" onclick="show()"> Daftar Akun</span> -->
@@ -78,6 +78,9 @@
               <div class="text-center">
                 <a class="small" href="<?= base_url('login') ?>">Already have an account? Login!</a>
               </div>
+                <div class="text-center">
+                  <a class="small" href="<?= base_url() ?>">Back</a>
+                </div>
             </div>
           </div>
         </div>

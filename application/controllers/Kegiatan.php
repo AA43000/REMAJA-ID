@@ -39,7 +39,7 @@ class Kegiatan extends CI_Controller {
 	}
     
     public function load_data() {
-	$select = "a.*, b.nama as jenis_kegiatan";
+	$select = "a.*";
 	//LIMIT
 	$limit = array(
 		'start'  => $this->input->get('start'),
@@ -47,7 +47,7 @@ class Kegiatan extends CI_Controller {
 	);
 	//WHERE LIKE
 	$where_like['data'][] = array(
-		'column' => 'a.nama, b.nama',
+		'column' => 'a.nama',
 		'param'	 => $this->input->get('search[value]')
 	);
 	//ORDER
@@ -57,20 +57,14 @@ class Kegiatan extends CI_Controller {
 		'type'	 => $this->input->get('order[0][dir]')
 	);
 
-	$join['data'][] = array(
-		'table' => 'jenis_kegiatan b',
-		'join'	=> 'b.id=a.id_jenis_kegiatan',
-		'type'	=> 'left'
-	);
-
 	$where['data'][]=array(
 		'column'	=>'a.status_delete',
 		'param'		=>0
 		);		
 
-	$query_total = $this->Modelku->select($select,'kegiatan a',NULL,NULL,NULL,$join,$where);
-	$query_filter = $this->Modelku->select($select,'kegiatan a',NULL,$where_like,$order,$join,$where);
-	$query = $this->Modelku->select($select,'kegiatan a',$limit,$where_like,$order,$join,$where);
+	$query_total = $this->Modelku->select($select,'kegiatan a',NULL,NULL,NULL,NULL,$where);
+	$query_filter = $this->Modelku->select($select,'kegiatan a',NULL,$where_like,$order,NULL,$where);
+	$query = $this->Modelku->select($select,'kegiatan a',$limit,$where_like,$order,NULL,$where);
 	$response['data'] = array();
 	if ($query<>false) {
 		$no = $limit['start']+1;
@@ -82,8 +76,8 @@ class Kegiatan extends CI_Controller {
 				
 				$response['data'][] = array(
                     $no,
+                    $val->tanggal,
                     $val->nama,
-                    $val->jenis_kegiatan,
                     $val->deskripsi,
                     $image,
                     $edit." ".$delete
@@ -145,7 +139,7 @@ class Kegiatan extends CI_Controller {
     function general_input_post() {
         $data = [
             'nama' => $this->input->post('nama'),
-            'id_jenis_kegiatan' => $this->input->post('id_jenis_kegiatan'),
+            'tanggal' => $this->input->post('tanggal'),
             'deskripsi' => $this->input->post('deskripsi'),
         ];
 
@@ -153,12 +147,11 @@ class Kegiatan extends CI_Controller {
     }
 
 	public function edit_data($id) {
-		$query = $this->db->query("SELECT a.*, b.nama as jenis_kegiatan FROM kegiatan a LEFT JOIN jenis_kegiatan b ON b.id=a.id_jenis_kegiatan WHERE a.id = $id AND a.status_delete = 0")->row();
+		$query = $this->db->query("SELECT a.* FROM kegiatan a WHERE a.id = $id AND a.status_delete = 0")->row();
         $response['value'] = [
             'id' => $query->id,
+            'tanggal' => $query->tanggal,
             'nama' => $query->nama,
-            'id_jenis_kegiatan' => $query->id_jenis_kegiatan,
-			'jenis_kegiatan' => $query->jenis_kegiatan,            
 			'deskripsi' => $query->deskripsi,
 			'image' => '<img src="'.base_url('assets/image/kegiatan/').$query->image.'" alt="image alt" width="100%">'
 			
@@ -212,15 +205,4 @@ class Kegiatan extends CI_Controller {
 
 		return $this->upload->data('file_name'); // mengembalikan nama file
     }
-    public function get_select_jenis()
-    {
-        $this->db->select("a.id, CONCAT(a.nama) as text");
-        $this->db->where("a.status_delete", 0);
-        $this->db->like("CONCAT_WS(' ', a.nama)", $this->input->get('q'));
-        $this->db->limit(50);
-        $response["items"] = $this->db->get("jenis_kegiatan a")->result();
-        
-        echo json_encode($response);
-    }
-
 }

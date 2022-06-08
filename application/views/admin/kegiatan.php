@@ -20,8 +20,8 @@
                   <thead>
                     <tr>
                       <th width="10%">No</th>
+                      <th width="10%">Tanggal</th>
                       <th width="20%">Nama</th>
-                      <th width="10%">Jenis Kegiatan</th>
                       <th width="30%">Deskripsi</th>
                       <th width="20%">Foto</th>
                       <th width="10%">Action</th>
@@ -30,8 +30,8 @@
                   <tfoot>
                   <tr>
                     <th width="10%">No</th>
+                    <th width="10%">Tanggal</th>
                       <th width="20%">Nama</th>
-                      <th width="10%">Jenis Kegiatan</th>
                       <th width="30%">Deskripsi</th>
                       <th width="20%">Foto</th>
                       <th width="10%">Action</th>
@@ -63,14 +63,13 @@
         <form id="formAll">
             <input type="hidden" name="id" id="id" value="">
 
+            <div class="form-group">
+              <label for="tanggal">Tanggal</label>
+              <input type="date" class="form-control" id="tanggal" name="tanggal">
+            </div>
           <div class="form-group">
-            <label for="header">Nama</label>
+            <label for="nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">
-          </div>
-
-          <div class="form-group">
-            <label for="id_jenis_kegiatan">Jenis Kegiatan</label>
-            <select name="id_jenis_kegiatan" id="id_jenis_kegiatan" class="form-control" style="width: 100%"></select>
           </div>
           <div class="form-group">
             <label for="deskripsi">Deskripsi</label>
@@ -102,7 +101,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         load_data();
-        load_select_jenis();
         $("#image").filestyle({
           btnClass : 'btn-outline-primary',
           text: 'Pilih Image'
@@ -122,8 +120,8 @@
             },
             "columns" :[
                 {"name" : "id"},
+                {"name" : "tanggal"},
                 {"name" : "nama"},
-                {"name" : "jenis_kegiatan"},
                 {"name" : "deskripsi"},
                 {"name" : "image"},
                 {"name" : "action", "orderable": false, "searchlable": false, "className": "text-center"}
@@ -166,7 +164,7 @@
       $("#id").val(0);
       $("#nama").val("");
       $("#deskripsi").val("");
-      $("#id_jenis_kegiatan option").remove();
+      $("#tanggal").val("");
       $("#image").filestyle('clear');
       $("#image-view").addClass("d-none");
     }
@@ -181,11 +179,9 @@
             $("#nama").val(data.value.nama);
             $("#id").val(data.value.id);
             $("#deskripsi").val(data.value.deskripsi);
+            $("#tanggal").val(data.value.tanggal);
             $("#image-view").removeClass("d-none");
             $("#src").html(data.value.image);
-            if(Number(data.value.id_jenis_kegiatan) > 0) {
-                $("#id_jenis_kegiatan").append("<option value='"+data.value.id_jenis_kegiatan+"'>"+data.value.jenis_kegiatan+"</option>")
-            }
         });
     }
 
@@ -221,37 +217,5 @@
           swal("Data Tidak jadi dihapus!");
         }
       });
-    }
-    function load_select_jenis(){
-        $('#id_jenis_kegiatan').select2({
-            placeholder: 'Pilih Jenis Kegiatan',
-            multiple: false,
-            allowClear: true,
-            ajax: {
-                url: '<?php echo site_url("Kegiatan/get_select_jenis"); ?>',
-                dataType: 'json',
-                delay: 100,
-                cache: true,
-                data: function (params) {
-                    return {
-                        q: params.term, // search term
-                        page: params.page
-                    };
-                },
-                processResults: function (data, params) {
-                    params.page = params.page || 1;
-                    return {
-                        results: data.items,
-                        pagination: {
-                            more: (params.page * 30) < data.total_count
-                        }
-                    };
-                }
-            },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            minimumInputLength: 0,
-            templateResult: FormatResult,
-            templateSelection: FormatSelection,
-        });
     }
 </script>
