@@ -22,7 +22,7 @@ class Pengumuman extends CI_Controller {
 	{
 		parent::__construct();
 		if ($this->session->userdata("id_user")) {
-            if($this->session->userdata("user_type") == 1) {
+            if($this->session->userdata("user_type") == 1 || $this->session->userdata("user_type") == 3) {
 
             } else {
                 redirect(base_url('welcome/admin'));

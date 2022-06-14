@@ -143,7 +143,7 @@
       </div>
       <div class="modal-body">
         <p class="text-right">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</p>
-        <p>Melalui pesan ini kami ingatkan kepada seluruh anggota karang taruna <b>kampala</b> untuk dapat berkenan hadir pada <span id="nama"></span> yang akan dilaksanakan pada:</p>
+        <p>Melalui pesan ini kami sampaikan kepada seluruh anggota karang taruna <b>kampala</b> untuk dapat berkenan hadir <span id="nama"></span> yang akan dilaksanakan pada:</p>
         <span>Tanggal: <span id="tanggal"></span></span><br>
         <span>Pukul: <span id="waktu"></span> WIB - selesai</span><br>
         <span>Tempat: <span id="tempat"></span></span><br>

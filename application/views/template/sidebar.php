@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>welcome/admin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
         <div class="sidebar-brand-icon">
           <i class="fas fa-users"></i>
         </div>
@@ -73,7 +73,7 @@
         <div id="bendahara" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Master:</h6>
-            <a class="collapse-item" href="<?= base_url() ?>Jumlah_kas">Jumlah Kas</a>
+            <!-- <a class="collapse-item" href="<?= base_url() ?>Jumlah_kas">Jumlah Kas</a> -->
             <a class="collapse-item" href="<?= base_url() ?>M_pemasukan">Pemasukan</a>
             <a class="collapse-item" href="<?= base_url() ?>M_pengeluaran">Pengeluaran</a>
             <h6 class="collapse-header">Transaksi:</h6>
@@ -94,7 +94,7 @@
         <div id="petugas" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Tampilan:</h6>
-            <a class="collapse-item" href="<?= base_url() ?>Jenis_kegiatan">Jenis Kegiatan</a>
+            <!-- <a class="collapse-item" href="<?= base_url() ?>Jenis_kegiatan">Jenis Kegiatan</a> -->
             <a class="collapse-item" href="<?= base_url() ?>Kegiatan">Kegiatan</a>
             <a class="collapse-item" href="<?= base_url() ?>Pengumuman">Pengumuman</a>
             <a class="collapse-item" href="<?= base_url() ?>Unit">Unit</a>
