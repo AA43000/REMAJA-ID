@@ -37,6 +37,7 @@
             <h6 class="collapse-header">Custom Pengaturan:</h6>
             <a class="collapse-item" href="<?= base_url('User') ?>">User</a>
             <a class="collapse-item" href="<?= base_url('Lupa_password') ?>">Lupa Password</a>
+            <a class="collapse-item" href="<?= base_url('Pengaduan') ?>">Pengaduan</a>
           </div>
         </div>
       </li>

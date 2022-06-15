@@ -6,6 +6,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <span onclick="show_pengaduan()" style="cursor: pointer" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-bullhorn fa-sm text-white-50"></i> Pengaduan</span>
           </div>
 
           <!-- Content Row -->
@@ -159,12 +160,49 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalPengaduan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pengaduan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form id="formAll">
+          <div class="form-group">
+            <label for="header">Text</label>
+            <textarea name="text" id="text" class="form-control"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="kirim_pengaduan()">Kirim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script type="text/javascript">
     $(document).ready(function() {
         load_data();
         load_kas();
+        $("#image").filestyle({
+          btnClass : 'btn-outline-primary',
+          text: 'Pilih Image'
+        });
         $('#formModal').on('hidden.bs.modal', function (e) {
             load_data();
+        });
+        $('#modalPengaduan').on('hidden.bs.modal', function (e) {
+            reset_pengaduan();
         });
     });
     function load_data() {
@@ -226,5 +264,36 @@
           $("#riwayat_kas").html(result);
         }
       })
+    }
+    function show_pengaduan() {
+      $("#modalPengaduan").modal("show");
+    }
+    function reset_pengaduan() {
+      $("#text").val("");
+      $("#image").filestyle('clear');
+    }
+    function kirim_pengaduan() {
+      var formData = new FormData($("#formAll")[0]);
+      $.ajax({
+        url: "<?= base_url('Welcome/kirim_pengaduan') ?>",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        type: 'post'
+      }).done(function(data) {
+        if(data.status == 200) {
+          swal({
+            title: "Berhasil!",
+            text: data.message,
+            icon: "success",
+            button: "oke",
+          }).then((status)=>{
+            $("#modalPengaduan").modal('hide');
+          });
+        } else if(data.status == 202) {
+          swal("Warning", data.message, "warning");
+        }
+      }) 
     }
 </script>

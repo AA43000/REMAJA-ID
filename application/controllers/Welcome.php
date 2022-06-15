@@ -148,4 +148,44 @@ class Welcome extends CI_Controller {
 
 		echo json_encode(["data" => $query]);
 	}
+	public function kirim_pengaduan() {
+		$data = [
+			"text" => $this->input->post("text"),
+			"id_user" => $this->session->userdata("id_user"),
+			"tanggal" => date("Y-m-d")
+		];
+		$upload = $this->do_upload();
+		$data['image'] = $upload;
+		$insert = $this->db->insert('pengaduan', $data);
+		if($insert<>false) {
+			$response['status'] = '200';
+			$response['message'] = 'Berhasil mengirim data';
+		} else {
+			$response['status'] = '202';
+			$response['message'] = 'gagal tambah data';
+		}
+
+		echo json_encode($response);
+	}
+	function do_upload() {
+        $config['upload_path'] = 'assets/image/pengaduan/'; // folder menyimpan gambar
+        $config['allowed_types'] = 'gif|jpg|png';
+		// $config['max_size'] = '1000'; //dalam kilobyte(kb)
+		// $config['max_width']            = 1000; // batas lebar gambar
+		// $config['max_height']           = 1000; // batas tinggi gambar
+		$config['width'] = 500;
+        $config['file_name'] = round(microtime(true) * 1000); //nama file
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload('image')) { // jika upload gagal
+            $data['inputerror'][] =  'image';
+            $data['error_string'][] = "Upload error: ".$this->upload->display_errors('', ''); //menampilkan error
+            $data['status'] = FALSE;
+            echo json_encode($data);
+            exit();
+		}
+
+		return $this->upload->data('file_name'); // mengembalikan nama file
+	}
 }
