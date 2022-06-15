@@ -63,9 +63,7 @@ class Profile extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 		$password = $this->input->post('passwordLama');
 		$query = $this->db->query("SELECT * FROM user WHERE id_user = $id_user")->row();
-		// echo password_hash($this->input->post('passwordLama'), PASSWORD_BCRYPT);
 		if(password_verify($password, $query->password)) {
-		// if($password == $query->password) {
 			$data = [
 				'password' => password_hash($this->input->post('passwordBaru'), PASSWORD_BCRYPT)
 			];

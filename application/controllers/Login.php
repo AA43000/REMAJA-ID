@@ -114,4 +114,27 @@ class Login extends CI_Controller {
 		$logout = $this->session->unset_userdata($userdata);
 		redirect(base_url('login'));
 	}
+
+	public function lupa_password() {
+		$no_wa = $this->input->post("no_wa");
+		$this->db->select("id_user");
+		$this->db->where("nomor_wa", $no_wa);
+		$this->db->where("status_delete", 0);
+		$user = $this->db->get("user")->row();
+		if($user) {
+			$this->db->insert("lupa_password", [
+				"id_user" => $user->id_user,
+				"tanggal" => date("Y-m-d"),
+				"no_wa" => $no_wa
+			]);
+
+			$response['status'] = 200;
+		} else {
+			$response['status'] = 202;
+			$response['message'] = "nomor tidak ditemukan, pastikan dengan benar";
+		}
+
+
+		echo json_encode($response);
+	}
 }

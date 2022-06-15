@@ -119,7 +119,7 @@
             icon: "success",
             button: "oke",
           }).then((status)=>{
-            link(data.user_type);
+            window.location.href = "<?= base_url("Welcome/admin") ?>"
           });
         } else {
           swal("Warning", data.message, "warning");
@@ -127,10 +127,6 @@
           $("#password").val("");
         }
       });
-    }
-
-    function link(user_type) {
-      window.location.href = "<?= base_url("welcome/admin") ?>";
     }
   </script>
 

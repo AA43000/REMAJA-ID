@@ -40,15 +40,14 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                    <p class="mb-4">We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!</p>
+                    <p class="mb-4">Kami akan mengirimkan pasword baru untukmu lewat wa!</p>
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="text" class="form-control form-control-user" id="no_wa" placeholder="Masukkan No wa">
                     </div>
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">
-                      Reset Password
-                    </a>
+                    <span class="btn btn-primary btn-user btn-block" onclick="action()">Reset Password</span>
+                    <!-- <button type="button" class="btn btn-primary btn-user btn-block" onclick="action()">Reset Password</button> -->
                   </form>
                   <hr>
                   <div class="text-center">
@@ -81,6 +80,33 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
+  <script src="<?= base_url('assets/') ?>js/sweetalert.min.js"></script>
+
+  <script>
+    function action() {
+      var no_wa = $("#no_wa").val();
+      $.ajax({
+        url: "<?= base_url() ?>Login/lupa_password",
+        data: {no_wa, no_wa},
+        dataType: "json",
+        type: "post",
+        success: function(data) {
+          if(data.status == 200) {
+            swal({
+              title: "Berhasil!",
+              text: "Password baru akan dikirim ke wa anda,segera ganti password anda!!",
+              icon: "success",
+              button: "oke",
+            }).then((status)=>{
+              window.location.href = "<?= base_url() ?>";
+            });
+          } else {
+            swal("Warning", data.message, "warning");
+          }
+        }
+      })
+    }
+  </script>
 
 </body>
 

@@ -36,7 +36,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Pengaturan:</h6>
             <a class="collapse-item" href="<?= base_url('User') ?>">User</a>
-            <!-- <a class="collapse-item" href="<?php // echo base_url('User_type') ?>">User Type</a> -->
+            <a class="collapse-item" href="<?= base_url('Lupa_password') ?>">Lupa Password</a>
           </div>
         </div>
       </li>
