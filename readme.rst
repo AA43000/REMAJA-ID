@@ -24,6 +24,7 @@ Template home: `Grayscale <https://startbootstrap.com/theme/grayscale>`_
 Template dashboard: `SB Admin 2 <https://startbootstrap.com/theme/sb-admin-2>`_
 
 fitur fitur dalam aplikasi ini meliputi:
+
 - Login
 1. login (semua hak akses)
 2. register (hanya anggota)
