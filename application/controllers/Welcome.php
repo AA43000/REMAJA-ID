@@ -22,6 +22,9 @@ class Welcome extends CI_Controller {
 		if($this->session->userdata("id_user")) { 
 			$data['judul'] = 'Dashboard';
 			$data['jumlah_anggota'] = $this->db->query("SELECT id_user FROM user WHERE status_delete = 0 AND status_approve = 1")->num_rows();
+			$sekarang = date("Y-m-d");
+			$setahun = date("Y-m-d", strtotime("-1 years"));
+			$data['jumlah_kegiatan'] = $this->db->query("SELECT id FROM kegiatan WHERE status_delete = 0 AND tanggal <= '$sekarang' AND tanggal >= '$setahun'")->num_rows();
 			$data['jumlah_unit'] = $this->db->query("SELECT id FROM unit WHERE status_delete = 0")->num_rows();
 			$data['anggaran'] = number_format($this->db->query("SELECT jumlah FROM anggaran")->row()->jumlah);
 			$data['konten'] = $this->load->view('dashboard', $data, true);
@@ -154,8 +157,10 @@ class Welcome extends CI_Controller {
 			"id_user" => $this->session->userdata("id_user"),
 			"tanggal" => date("Y-m-d")
 		];
-		$upload = $this->do_upload();
-		$data['image'] = $upload;
+		if(!empty($_FILES['image']['name'])){
+			$upload = $this->do_upload();
+			$data['image'] = $upload;
+		}
 		$insert = $this->db->insert('pengaduan', $data);
 		if($insert<>false) {
 			$response['status'] = '200';

@@ -56,7 +56,10 @@ class Pengaduan extends CI_Controller {
 		$no = $limit['start']+1;
 		foreach ($query->result() as $val) {
 			if ($val->id>0) {
-                $image = '<a class="venobox" data-gall="slideGallery" title="slide '.$no.'" href="'.base_url('assets/image/pengaduan/').$val->image.'"><img src="'.base_url('assets/image/pengaduan/').$val->image.'" alt="image alt" width="100%"></a>';
+                $image = '';
+				if($val->image != '') {
+                    $image = '<a class="venobox" data-gall="slideGallery" title="slide '.$no.'" href="'.base_url('assets/image/pengaduan/').$val->image.'"><img src="'.base_url('assets/image/pengaduan/').$val->image.'" alt="image alt" width="100%"></a>';
+                }
                 
 				$response['data'][] = array(
                     $no,
